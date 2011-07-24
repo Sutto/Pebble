@@ -59,8 +59,11 @@
     Pebble.prototype.reconnected = function(callback) {
       return this.on('reconnect', callback);
     };
-    Pebble.prototype.receive = function(channel, message) {
-      return this.trigger(channel, message);
+    Pebble.prototype.receive = function(channel, message, opts) {
+      if (opts == null) {
+        opts = {};
+      }
+      return this.trigger(channel, message, opts);
     };
     Pebble.prototype.loadHistory = function(channel, callback) {
       return $.getJSON("/history/" + channel, __bind(function(data) {
@@ -68,7 +71,10 @@
         _ref = data.reverse();
         for (_i = 0, _len = _ref.length; _i < _len; _i++) {
           message = _ref[_i];
-          this.receive(channel, message);
+          this.receive(channel, message, {
+            initial: true,
+            loaded: message === data[0]
+          });
         }
         if (callback instanceof Function) {
           return callback();

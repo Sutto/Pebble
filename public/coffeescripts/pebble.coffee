@@ -33,13 +33,13 @@ class Pebble
   connected:    (callback) -> @on 'connect',    callback
   reconnected:  (callback) -> @on 'reconnect',  callback
   
-  receive: (channel, message) ->
-    @trigger channel, message
+  receive: (channel, message, opts = {}) ->
+    @trigger channel, message, opts
     
   loadHistory: (channel, callback) ->
     $.getJSON "/history/#{channel}", (data) =>
       for message in data.reverse()
-        @receive channel, message
+        @receive channel, message, initial: true, loaded: (message is data[0])
       callback() if callback instanceof Function
 
 window['Pebble'] = Pebble
