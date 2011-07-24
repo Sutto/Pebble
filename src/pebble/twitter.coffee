@@ -1,5 +1,5 @@
 NTwitter = require 'ntwitter'
-Base     = require('./base').Base
+Base     = require './base'
 sys      = require 'sys'
 
 class Twitter extends Base
@@ -33,4 +33,4 @@ class Twitter extends Base
       profile_image_url: tweet.user.profile_image_url
       screen_name:       tweet.user.screen_name
 
-exports.publisher = Twitter
+module.exports = Twitter

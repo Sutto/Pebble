@@ -56,4 +56,4 @@ class Web extends EventEmitter
     @app.listen @runner.port()
 
     
-exports.Web = Web
+module.exports = Web

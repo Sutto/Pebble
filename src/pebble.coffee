@@ -2,8 +2,8 @@ path   = require 'path'
 sys    = require 'sys'
 fs     = require 'fs'
 io     = require 'socket.io'
-redis  = require('./pebble/redis').RedisWrapper
-web    = require('./pebble/web').Web
+redis  = require './pebble/redis'
+web    = require './pebble/web'
 
 class Pebble
   
@@ -14,8 +14,12 @@ class Pebble
   add: (publisher) ->
     @publishers.push new publisher(@)
   
-  addFromRequire: (path) ->
-    @add require(path).publisher
+  addBuiltin: (name) ->
+    try
+      builtin = require "./pebble/#{name}"
+      @add builtin
+    catch e
+      sys.puts "Unable to add builtin publisher: #{name} - #{e}"
   
   run: ->
     sys.puts "Starting pebble..."
@@ -30,8 +34,9 @@ class Pebble
   visitableURL: -> 
     unless @_visitableURL?
       @_visitableURL = "http://#{@host()}"
-      if @port()?
-        @visitableURL += ":#{@port()}"
+      port = @port()
+      if port? and port isnt 80
+        @_visitableURL += ":#{port}"
       @_visitableURL += "/"
     @_visitableURL
     
@@ -55,5 +60,5 @@ class Pebble
     runner.run()
     runner
 
-Pebble.Base = require("./pebble/base").Base
+Pebble.Base = require './pebble/base'
 module.exports = Pebble

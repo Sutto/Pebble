@@ -29,4 +29,4 @@ class Base
     @runner.io.sockets.emit  key, message
     @runner.redis.addHistory key, JSON.stringify(message)
   
-exports.Base = Base
+module.exports = Base

@@ -1,12 +1,12 @@
-irc  = require('irc')
-Base = require('./base').Base
+irc  = require 'irc'
+Base = require './base'
 
 class IRC extends Base
   
   name: "irc"
   
   setup: ->
-    @channels = @get('channels')
+    @channels = @get 'channels'
     @client = new irc.Client @get('server'), @get('user'),
       channels: @channels
     @setupListeners()
@@ -22,4 +22,4 @@ class IRC extends Base
           channel: to,
           user:    from
         
-exports.publisher = IRC
+module.exports = IRC

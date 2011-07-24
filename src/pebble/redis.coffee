@@ -62,4 +62,4 @@ class RedisWrapper
     sys.puts "Result: #{sys.inspect result}"
     
     
-exports.RedisWrapper = RedisWrapper
+module.exports = RedisWrapper
