@@ -2,8 +2,8 @@ path   = require 'path'
 sys    = require 'sys'
 fs     = require 'fs'
 io     = require 'socket.io'
-redis  = require('./redis').RedisWrapper
-web    = require('./web').Web
+redis  = require('./chainsaw/redis').RedisWrapper
+web    = require('./chainsaw/web').Web
 
 class Chainsaw
   
@@ -35,8 +35,8 @@ class Chainsaw
       @_visitableURL += "/"
     @_visitableURL
     
-  host:         -> process.env.HOST or @get 'chainsaw.listen.host', 'localhost'
-  port:         -> process.env.PORT or @get 'chainsaw.listen.port', 3003
+  host: -> process.env.HOST or @get 'chainsaw.listen.host', 'localhost'
+  port: -> process.env.PORT or @get 'chainsaw.listen.port', 3003
     
   get: (key, defaultValue) ->
     key_parts = key.split "."
@@ -55,5 +55,5 @@ class Chainsaw
     runner.run()
     runner
 
-Chainsaw.Base = require("./base").Base
+Chainsaw.Base = require("./chainsaw/base").Base
 module.exports = Chainsaw

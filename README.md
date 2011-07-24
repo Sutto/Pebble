@@ -16,6 +16,30 @@ I built prior versions for earlier rumbles.
 
 First, make sure you have [node.js](http://nodejs.org/) and [npm](http://npmjs.org/) installed.
 
+### Writing a Publisher
+
+Publishers are just the general idea of a configurable item which can push things to the notifications list.
+For example, to implement a simple publisher, you can do (in CoffeeScript):
+
+```coffeescript
+Base = require('chainsaw/base).Base
+
+class MyPublisher extends Base
+  name: "my-publisher"
+  
+  setup: ->
+    # Called automatically.
+    stored_name = @get "name" # gets name in the my-publisher key in the configuration
+    setInterval((=>
+      @emit some: "data"
+    ), 10000)
+```
+        
+You define a setup method that starts doing processing, configure a name (and optionally, `namespace`
+for events and `configNamespace` for the configuration json namespace). This simple yet flexible architecture
+makes it possible to build a wide variety of publishers.
+
+
 ### Configuration
 
 Chainsaw uses a standard `config.json` file which uses nested keys according to:

@@ -10,10 +10,26 @@ run = (args, cb) ->
     process.exit(1) if status != 0
     cb() if typeof cb is 'function'
     
+isDirectory = (f) ->
+  path.existsSync(f) and fs.statSync(f).isDirectory()
+    
 buildUnder = (input, output) ->
   files = fs.readdirSync input
-  files = (input + '/' + file for file in files when file.match(/\.coffee$/))
-  run ['-c', '-o', output].concat(files)
+  compiling   = []
+  directories = []
+  for file in files
+    fullPath = "#{input}/#{file}"
+    if file.match /\.coffee$/
+      compiling.push fullPath
+    else if isDirectory fullPath
+      directories.push [fullPath, "#{output}/#{file}"]
+  if compiling.length
+    unless isDirectory output
+      fs.mkdirSync output, 0755
+    run ['-c', '-o', output].concat(compiling)
+  if directories.length
+    for directory in directories
+      buildUnder directory[0], directory[1]
 
 task 'build:library', 'builds the library from coffee-script library', bl = ->
   console.log "Building the private server JavaScript..."
