@@ -1,0 +1,32 @@
+{
+  "chainsaw": {
+    "listen": {
+      "host": "localhost",
+      "port": 3004
+    },
+    "enabled": ["twitter", "irc"]
+  },
+  "redis": {
+    "host":       "localhost",
+    "namespace":  "chainsaw",
+    "password":   "something",
+    "port":       6379,
+    "maxHistory": 10
+  },
+  "twitter": {
+    "consumer": {
+      "key":    "your-consumer-key",
+      "secret": "your-consumer-secret"
+    },
+    "access_token": {
+      "key":    "oauth-key-goes-here",
+      "secret": "oauth-secret-goes-here"
+    },
+    "track":    ["a", "b", "c"]
+  },
+  "irc": {
+    "server":   "irc.freenode.net",
+    "user":     "chainsawv2",
+    "channels": ["#railsrumble"]
+  }
+}

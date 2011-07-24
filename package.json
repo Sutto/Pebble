@@ -1,0 +1,21 @@
+{
+  "name":        "chainsaw-app",
+  "version":     "2.0.0",
+  "description": "Chainsaw app is a series of tools for building real time event notifiers / streams.",
+  "keys":        ["realtime", "events", "stream"],
+  "author":      "Darcy Laycock <sutto@sutto.net> (http://blog.ninjahideout.com/)", 
+  "main":        "./lib/chainsaw",
+  "directories": {
+    "lib": "./lib"
+  },
+  "dependencies": {
+    "express":       "~> 2.4.3",
+    "irc":           "~> 0.2.0",
+    "ntwitter":      "~> 0.2.1",
+    "socket.io":     "~> 0.7.7",
+    "hiredis":       "~> 0.1.12",
+    "redis":         "~> 0.6.0",
+    "node-static":   "~> 0.5.7",
+    "ejs":           "~> 0.4.3"
+  }
+}
