@@ -22,7 +22,7 @@ Publishers are just the general idea of a configurable item which can push thing
 For example, to implement a simple publisher, you can do (in CoffeeScript):
 
 ```coffeescript
-Base = require('pebble/base).Base
+Base = require('pebble').Base
 
 class MyPublisher extends Base
   name: "my-publisher"
@@ -60,7 +60,7 @@ Lastly, in the case of the following, they can also be overridden by an environm
 * `pebble.redis.password` (by `REDIS_PASSWORD`)
 * `pebble.redis.maxHistory` (by `REDIS_MAXHISTORY`)
 
-### The Public JavasScript Portion
+### The Public JavaScript Portion
 
 Please note the public portion can be found in `public/` and that
 your application uses Pebble. It'd be pretty simple to port it to use
