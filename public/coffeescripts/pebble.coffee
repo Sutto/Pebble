@@ -21,7 +21,7 @@ class Pebble
   
   watch: (channel, callback) ->
     @on channel, callback
-    @loadHistoryFor @, channel, =>
+    @loadHistory @, channel, =>
       @socket.on channel, (data) => @receive channel, data
   
   trigger: (name, args...) ->

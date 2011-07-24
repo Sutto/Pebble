@@ -33,7 +33,7 @@
     };
     Pebble.prototype.watch = function(channel, callback) {
       this.on(channel, callback);
-      return this.loadHistoryFor(this, channel, __bind(function() {
+      return this.loadHistory(this, channel, __bind(function() {
         return this.socket.on(channel, __bind(function(data) {
           return this.receive(channel, data);
         }, this));
