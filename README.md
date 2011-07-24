@@ -1,6 +1,6 @@
-# Chainsaw App v2
+# Pebble
 
-A complete rewrite of the old convoluted chainsaw codebase to make it:
+Pebble is real time event streams / pub sub done simply.
 
 * Cleaner in terms of code
 * Simpler to run (One process, versus many)
@@ -22,7 +22,7 @@ Publishers are just the general idea of a configurable item which can push thing
 For example, to implement a simple publisher, you can do (in CoffeeScript):
 
 ```coffeescript
-Base = require('chainsaw/base).Base
+Base = require('pebble/base).Base
 
 class MyPublisher extends Base
   name: "my-publisher"
@@ -42,9 +42,9 @@ makes it possible to build a wide variety of publishers.
 
 ### Configuration
 
-Chainsaw uses a standard `config.json` file which uses nested keys according to:
+Pebble uses a standard `config.json` file which uses nested keys according to:
 
-* Chainsaw Settings (`chainsaw`)
+* Pebble Settings (`pebble`)
 * Redis settings (`redis`)
 * Publisher settings (either the publisher name or the `configNamespace` value on a given publisher).
 
@@ -53,23 +53,29 @@ Please note that most options are optional.
 
 Lastly, in the case of the following, they can also be overridden by an environment variable:
 
-* `chainsaw.listen.host` (by `HOST`)
-* `chainsaw.listen.port` (by `PORT`)
-* `chainsaw.redis.host` (by `REDIS_HOST`)
-* `chainsaw.redis.port` (by `REDIS_HOST`)
-* `chainsaw.redis.password` (by `REDIS_PASSWORD`)
-* `chainsaw.redis.maxHistory` (by `REDIS_MAXHISTORY`)
+* `pebble.listen.host` (by `HOST`)
+* `pebble.listen.port` (by `PORT`)
+* `pebble.redis.host` (by `REDIS_HOST`)
+* `pebble.redis.port` (by `REDIS_HOST`)
+* `pebble.redis.password` (by `REDIS_PASSWORD`)
+* `pebble.redis.maxHistory` (by `REDIS_MAXHISTORY`)
 
 ### The Public JavasScript Portion
 
 Please note the public portion can be found in `public/` and that
-your application uses Chainsaw. It'd be pretty simple to port it to use
+your application uses Pebble. It'd be pretty simple to port it to use
 something other than jQuery but that is left as an exercise for the reader.
 
-## Developing Chainsaw
+## Developing Pebble
 
-To develop chainsaw, you'll also need to install coffee-script via:
+To develop pebble, you'll also need to install coffee-script via:
 
 ```bash
 npm install coffee-script
 ````
+
+Next, to compile the javascript, you can run:
+
+```bash
+cake build
+```

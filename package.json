@@ -1,10 +1,10 @@
 {
-  "name":        "chainsaw-app",
-  "version":     "2.0.0",
-  "description": "Chainsaw app is a series of tools for building real time event notifiers / streams.",
+  "name":        "pebble",
+  "version":     "1.0.0",
+  "description": "pebble is a series of tools for building real time event notifiers / streams.",
   "keys":        ["realtime", "events", "stream"],
   "author":      "Darcy Laycock <sutto@sutto.net> (http://blog.ninjahideout.com/)", 
-  "main":        "./lib/chainsaw",
+  "main":        "./lib/pebble",
   "directories": {
     "lib": "./lib"
   },

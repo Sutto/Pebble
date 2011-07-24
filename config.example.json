@@ -1,5 +1,5 @@
 {
-  "chainsaw": {
+  "pebble": {
     "listen": {
       "host": "localhost",
       "port": 3004
@@ -8,7 +8,7 @@
   },
   "redis": {
     "host":       "localhost",
-    "namespace":  "chainsaw",
+    "namespace":  "pebble",
     "password":   "something",
     "port":       6379,
     "maxHistory": 10
@@ -26,7 +26,7 @@
   },
   "irc": {
     "server":   "irc.freenode.net",
-    "user":     "chainsawv2",
+    "user":     "pebble",
     "channels": ["#railsrumble"]
   }
 }
