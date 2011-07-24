@@ -16,6 +16,23 @@ I built prior versions for earlier rumbles.
 
 First, make sure you have [node.js](http://nodejs.org/) and [npm](http://npmjs.org/) installed.
 
+Next, install the package and then you can do the following:
+
+```coffeescript
+config = path.normalize("#{__dirname}/config.json")
+
+MyCustomPublisher = require 'my_customer_publisher'
+
+runner = Pebble.run config, (runner) ->
+  # Defines a given runner, by default these are irc and
+  # twitter
+  runner.addBuiltin 'twitter'
+  runner.add MyCustomPublisher
+  
+puts "App is now running on on #{runner.visitableURL()}"
+
+```
+
 ### Writing a Publisher
 
 Publishers are just the general idea of a configurable item which can push things to the notifications list.
@@ -33,12 +50,15 @@ class MyPublisher extends Base
     setInterval((=>
       @emit some: "data"
     ), 10000)
+    
+module.exports = MyPublisher
 ```
         
 You define a setup method that starts doing processing, configure a name (and optionally, `namespace`
 for events and `configNamespace` for the configuration json namespace). This simple yet flexible architecture
 makes it possible to build a wide variety of publishers.
 
+To use a publisher in your.
 
 ### Configuration
 
