@@ -9,6 +9,14 @@ class Pebble
   
   constructor: (@config) ->
     @publishers = []
+    @version    = @packageMetadata().version
+    
+  packageMetadata: ->
+    unless @_packageMetadata
+      file = path.normalize "#{__dirname}/../package.json"
+      contents = fs.readFileSync file
+      @_packageMetadata = JSON.parse contents
+    @_packageMetadata  
   
   # Adds a publisher to the current runner.
   add: (publisher) ->
