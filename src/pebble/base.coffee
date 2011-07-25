@@ -26,7 +26,7 @@ class Base
     else
       message = key
       key     = @namespace
-    @runner.io.sockets.emit  key, message
-    @runner.redis.addHistory key, JSON.stringify(message)
+    @runner.broadcast.sockets.emit key, message
+    @runner.redis.addHistory       key, JSON.stringify(message)
   
 module.exports = Base
