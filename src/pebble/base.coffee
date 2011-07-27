@@ -26,7 +26,9 @@ class Base
     else
       message = key
       key     = @namespace
-    @runner.broadcast.sockets.emit key, message
-    @runner.redis.addHistory       key, JSON.stringify(message)
+    @runner.broadcast.broadcast key, message
+    @runner.redis.addHistory    key, JSON.stringify(message)
+    
+  shouldBeRun: -> @runner.mode is 'server' or @runner.broadcaster is 'direct'
   
 module.exports = Base

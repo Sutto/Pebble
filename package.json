@@ -20,7 +20,8 @@
     "hiredis":       "~0.1.12",
     "redis":         "~0.6.0",
     "node-static":   "~0.5.7",
-    "ejs":           "~0.4.3"
+    "ejs":           "~0.4.3",
+    "optimist":      "~0.2.6"
   },
   "devDependencies": {
     "coffee-script": "~1.1.1"
