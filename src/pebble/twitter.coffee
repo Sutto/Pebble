@@ -15,11 +15,17 @@ class Twitter extends Base
       access_token_secret: config.access_token.secret
     })
     outer = @
+
+  startStream: ->
+    outer = this
     @twitter.stream 'statuses/filter', track: config.track, (stream) =>
       stream.on 'data', (tweet) =>
         outer.emit 'tweet', outer.filtered tweet
       stream.on 'end', (resp) ->
         sys.puts "Twitter Connection ended, Status code was #{resp.statusCode}"
+        reconnect = -> outer.startStream()
+        # Reconnect in 10 secodns
+        setTimeout reconnect, 10000
       stream.on 'error', (error) ->
         sys.puts "Error in Twitter: #{error.message}"
   
