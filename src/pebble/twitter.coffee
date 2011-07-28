@@ -18,6 +18,7 @@ class Twitter extends Base
 
   startStream: ->
     outer = this
+    config = @config()
     @twitter.stream 'statuses/filter', track: config.track, (stream) =>
       stream.on 'data', (tweet) ->
         outer.emit 'tweet', outer.filtered tweet
