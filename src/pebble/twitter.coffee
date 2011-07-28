@@ -14,6 +14,7 @@ class Twitter extends Base
       access_token_key:    config.access_token.key
       access_token_secret: config.access_token.secret
     })
+    @startStream()
 
   startStream: ->
     outer = this
