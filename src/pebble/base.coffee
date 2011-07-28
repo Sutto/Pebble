@@ -1,4 +1,5 @@
 sys = require 'sys'
+uuid = require 'node-uuid'
 
 class Base
   
@@ -26,6 +27,8 @@ class Base
     else
       message = key
       key     = @namespace
+    # Generate a unique uuid for each outgoing message.
+    message._id = uuid()
     @runner.broadcast.broadcast key, message
     @runner.redis.addHistory    key, JSON.stringify(message)
     

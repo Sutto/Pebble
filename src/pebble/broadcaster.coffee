@@ -24,6 +24,10 @@ class Broadcaster
   setupClient: ->
     @io = io.listen @runner.web.app
     @io.set 'log level', 0
+    @io.configure 'production', =>
+      @io.enable 'browser client minification'
+      @io.enable 'browser client etag'
+    
     
   setupPubSub: ->
     # When it's indirect, we need to do some type conditional setup.
