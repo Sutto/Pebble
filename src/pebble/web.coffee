@@ -52,8 +52,9 @@ class Web extends EventEmitter
       
   
   run: ->
+    sys.puts "Starting and running on port #{@runner.port}"
     @configure()
-    @app.listen @runner.port()
+    @app.listen @runner.port
 
     
 module.exports = Web

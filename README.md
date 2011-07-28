@@ -58,7 +58,33 @@ You define a setup method that starts doing processing, configure a name (and op
 for events and `configNamespace` for the configuration json namespace). This simple yet flexible architecture
 makes it possible to build a wide variety of publishers.
 
-To use a publisher in your.
+To use a publisher in your app, just require the file and use:
+
+```coffeescript
+runner_instance.add YourPublisher
+```
+
+Like is seen above.
+
+### Different Modes & Broadcasters
+
+Pebble can be run in two modes (`client` (the default) and `server`, set via `pebble.mode`) as well as with two different broadcaster options
+(`pubsub` or `direct`, the default).
+
+In `direct` broadcaster mode, everything will be run in process where as in the `pubsub` mode, you typically run
+socket.io and a front end in the `client` and any publishers (e.g. twitter) in the server process, allowing 1 publisher
+setup broadcasting to many clients. One key thing of this approach is that it allows some flexibility in regards
+to dealing with apps, ultimately making it simpler to build out (e.g. not running everything in a single process).
+
+By default, any `add`-ed publishers are only run when the app is using the `direct` broadcaster or is running in `server` mode.
+This can be changed on a per-publisher based by overriding the `shouldBeRun` function on your publisher, allowing conditional logic.
+
+E.g. to run something on whatever app runs the web server, one would replace it with:
+
+```coffeescript
+class MyPublisher extends Base
+  shouldBeRun: -> @runner.shouldRunWeb
+```
 
 ### Configuration
 
@@ -71,6 +97,17 @@ Pebble uses a standard `config.json` file which uses nested keys according to:
 An example of this can be seen in the `config.example.json` file which contains **all** options.
 Please note that most options are optional.
 
+Likewise, if you pass a second parameter before the callback to `Pebble.run` with a value of true,
+you can pass command line arguments to your program - e.g.:
+
+```coffeescript
+Pebble.run config, true, (runner) ->
+  runner.addBuiltin 'twitter'
+```
+
+And then invoke your program with --help. This lets you set mode, broadcaster, host and port for the
+app in a content-sensitive manner.
+
 Lastly, in the case of the following, they can also be overridden by an environment variable:
 
 * `pebble.listen.host` (by `HOST`)
@@ -79,6 +116,8 @@ Lastly, in the case of the following, they can also be overridden by an environm
 * `pebble.redis.port` (by `REDIS_HOST`)
 * `pebble.redis.password` (by `REDIS_PASSWORD`)
 * `pebble.redis.maxHistory` (by `REDIS_MAXHISTORY`)
+* `pebble.broadcaster` (by `PEBBLE_BROADCASTER`)
+* `pebble.mode` (by `PEBBLE_MODE`)
 
 ### The Public JavaScript Portion
 

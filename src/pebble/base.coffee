@@ -1,4 +1,5 @@
 sys = require 'sys'
+uuid = require 'node-uuid'
 
 class Base
   
@@ -26,7 +27,11 @@ class Base
     else
       message = key
       key     = @namespace
-    @runner.broadcast.sockets.emit key, message
-    @runner.redis.addHistory       key, JSON.stringify(message)
+    # Generate a unique uuid for each outgoing message.
+    message._id = uuid()
+    @runner.broadcast.broadcast key, message
+    @runner.redis.addHistory    key, JSON.stringify(message)
+    
+  shouldBeRun: -> @runner.mode is 'server' or @runner.broadcaster is 'direct'
   
 module.exports = Base
