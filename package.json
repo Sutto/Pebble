@@ -1,6 +1,6 @@
 {
   "name":        "pebble",
-  "version":     "1.1.1",
+  "version":     "1.1.2",
   "description": "pebble is a series of tools for building real time event notifiers / streams.",
   "keys":        ["realtime", "events", "stream"],
   "author":      "Darcy Laycock <sutto@sutto.net> (http://blog.ninjahideout.com/)", 
