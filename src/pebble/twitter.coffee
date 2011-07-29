@@ -8,6 +8,7 @@ class Twitter extends Base
   
   setup: ->
     config = @config()
+    @trackingRegexp = @buildTrackingRegexp config.track
     @twitter = new NTwitter({
       consumer_key:        config.consumer.key
       consumer_secret:     config.consumer.secret
@@ -21,7 +22,8 @@ class Twitter extends Base
     config = @config()
     @twitter.stream 'statuses/filter', track: config.track, (stream) =>
       stream.on 'data', (tweet) ->
-        outer.emit 'tweet', outer.filtered tweet
+        unless tweet.text.match outer.trackingRegexp
+          outer.emit 'tweet', outer.filtered tweet
       stream.on 'end', (resp) ->
         sys.puts "Twitter Connection ended, Status code was #{resp.statusCode}"
         reconnect = -> outer.startStream()
@@ -39,5 +41,8 @@ class Twitter extends Base
       name:              tweet.user.name
       profile_image_url: tweet.user.profile_image_url
       screen_name:       tweet.user.screen_name
+  
+  buildTrackingRegexp: (keywords) ->
+    new RegExp "(#{keywords.join('|')})", 'i'
 
 module.exports = Twitter
