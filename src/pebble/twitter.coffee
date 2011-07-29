@@ -22,7 +22,7 @@ class Twitter extends Base
     config = @config()
     @twitter.stream 'statuses/filter', track: config.track, (stream) =>
       stream.on 'data', (tweet) ->
-        unless tweet.text.match outer.trackingRegexp
+        if tweet.text.match outer.trackingRegexp
           outer.emit 'tweet', outer.filtered tweet
       stream.on 'end', (resp) ->
         sys.puts "Twitter Connection ended, Status code was #{resp.statusCode}"
