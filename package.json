@@ -1,6 +1,6 @@
 {
   "name":        "pebble",
-  "version":     "1.1.1",
+  "version":     "1.1.7",
   "description": "pebble is a series of tools for building real time event notifiers / streams.",
   "keys":        ["realtime", "events", "stream"],
   "author":      "Darcy Laycock <sutto@sutto.net> (http://blog.ninjahideout.com/)", 
@@ -21,7 +21,8 @@
     "redis":         "~0.6.0",
     "node-static":   "~0.5.7",
     "ejs":           "~0.4.3",
-    "optimist":      "~0.2.6"
+    "optimist":      "~0.2.6",
+    "node-uuid":     "~1.2.0"
   },
   "devDependencies": {
     "coffee-script": "~1.1.1"
