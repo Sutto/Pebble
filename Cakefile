@@ -11,7 +11,7 @@ run = (args, cb) ->
     cb() if typeof cb is 'function'
     
 isDirectory = (f) ->
-  path.existsSync(f) and fs.statSync(f).isDirectory()
+  fs.existsSync(f) and fs.statSync(f).isDirectory()
     
 buildUnder = (input, output) ->
   files = fs.readdirSync input
